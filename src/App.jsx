@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyles";
-import { Button } from "./styles/ButtonNew";
-import Header from "./ui/Header";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Account from "./pages/Account";
+import Cabins from "./pages/Cabins";
+import Login from "./pages/Login";
+import Settings from "./pages/Settings";
+import Users from "./pages/Users";
+import PageNotFound from "./pages/PageNotFound";
+import Bookings from "./pages/Bookings";
+import AppLayout from "./ui/AppLayout";
 
 const H1 = styled.h1`
   color: white;
@@ -20,20 +28,6 @@ const H1 = styled.h1`
   }
 `;
 
-// const Button = styled.button`
-//   background: blue;
-//   color: white;
-//   padding: 10px 20px;
-//   border: none;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   transition: background 0.3s ease;
-
-//   &:hover {
-//     background: #333;
-//   }
-// `;
-
 const Input = styled.input`
   border: 1px solid gray;
   font-size: 16px;
@@ -50,24 +44,22 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <ContainerStyle>
-        <H1>Hello vite</H1>
-        <Header type="h1">Hello world how are you</Header>
-        <Header type="h3">Hello world how are you</Header>
-        <Header as={"p"}>I am not h1</Header>
-        <div>
-          <Button variation="green" onClick={() => alert("Hello world")}>
-            Get away
-          </Button>
-          <Button variation="green" onClick={() => alert("Hello world")}>
-            Get away
-          </Button>
-        </div>
-        <div>
-          <Input placeholder="Enter your name" />
-          <Input placeholder="Enter your email" />
-        </div>
-      </ContainerStyle>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to={"dashboard"} />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="account" element={<Account />} />
+            <Route path="Cabins" element={<Cabins />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="users" element={<Users />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
