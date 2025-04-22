@@ -1,27 +1,35 @@
-import { useEffect } from "react";
+import { useState } from "react";
+import CabinTable from "../features/cabins/CabinTable";
+import CreateCabinForm from "../features/cabins/CreateCabinForm";
+import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import { getCabnis } from "../services/apiCabnis";
 
 function Cabins() {
-  useEffect(function () {
-    async function fetchCabins() {
-      const cabins = await getCabnis();
-      console.log(cabins);
-    }
-
-    fetchCabins();
-  }, []);
+  const [showForm, setShowForm] = useState(false);
   return (
-    <Row type="horizontal">
-      <Heading as="h1">All cabins</Heading>
-      <p>TEST</p>
+    <>
+      <Row type="horizontal">
+        <Heading as="h1">All cabins</Heading>
+        <p>
+          <span>filter</span>/<span>sort</span>
+        </p>
+      </Row>
 
-      <img
-        src="https://osfmvsupwczeqnlzjtcv.supabase.co/storage/v1/object/public/cabin-image//cabin-001.jpg"
-        alt=""
-      />
-    </Row>
+      <Row>
+        <CabinTable />
+      </Row>
+      <Row>
+        <Button
+          onClick={() => setShowForm(!showForm)}
+          variation="primary"
+          size="small"
+        >
+          {showForm ? "Hide form" : "Create new cabin"}
+        </Button>
+      </Row>
+      <Row>{showForm && <CreateCabinForm />}</Row>
+    </>
   );
 }
 
