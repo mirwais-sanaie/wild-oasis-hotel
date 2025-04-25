@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
@@ -12,7 +13,6 @@ import FormRow from "../../ui/FormRow";
 function CreateCabinForm() {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
-  console.log(errors);
 
   const queryClient = useQueryClient();
 
@@ -29,11 +29,11 @@ function CreateCabinForm() {
   });
 
   function submitOn(data) {
-    console.log(data);
-    mutate(data);
+    // console.log(data);
+    mutate({ ...data, image: data.image[0] });
   }
   function onError(errors) {
-    console.log(errors);
+    // console.log(errors);
   }
 
   return (
@@ -115,6 +115,10 @@ function CreateCabinForm() {
       <FormRow label="Image">
         <FileInput
           disabled={creatingCabinLoading}
+          {...register("image", {
+            required: "This field is required",
+          })}
+          type="file"
           id="image"
           accept="image/*"
         />
