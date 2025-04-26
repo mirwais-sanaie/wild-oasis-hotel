@@ -10,9 +10,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import FormRow from "../../ui/FormRow";
 
-function CreateCabinForm() {
+function CreateCabinForm({ cabinToEdit = {} }) {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
   const { errors } = formState;
+  const { id: editId, ...editValues } = cabinToEdit;
 
   const queryClient = useQueryClient();
 
