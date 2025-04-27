@@ -71,25 +71,26 @@ function CabinRow({ cabin }) {
     },
   });
   return (
-    <TableRow role="row">
-      <Img src={image} />
-      <Cabin>{name}</Cabin>
-      <div>up to {maxCapacity} guests</div>
-      <Price> {formatCurrency(regularPrice)}</Price>
-      {discount && <Discount>{discount} %</Discount>}
-      <div>
-        <button onClick={() => setShowForm((showForm) => !showForm)}>
-          Edit
-        </button>
-        <button disabled={isDeleting} onClick={() => mutate(cabinId)}>
-          Delete
-        </button>
-      </div>
-
+    <>
+      <TableRow role="row">
+        <Img src={image} />
+        <Cabin>{name}</Cabin>
+        <div>up to {maxCapacity} guests</div>
+        <Price> {formatCurrency(regularPrice)}</Price>
+        {discount && <Discount>{discount} %</Discount>}
+        <div>
+          <button onClick={() => setShowForm((showForm) => !showForm)}>
+            Edit
+          </button>
+          <button disabled={isDeleting} onClick={() => mutate(cabinId)}>
+            Delete
+          </button>
+        </div>
+      </TableRow>
       {showForm && (
         <CreateCabinForm cabinToEdit={cabin} setShowForm={setShowForm} />
       )}
-    </TableRow>
+    </>
   );
 }
 
