@@ -22,20 +22,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   });
   const { errors } = formState;
 
-  // const queryClient = useQueryClient();
-
-  // const { mutate, isLoading: isWorking } = useMutation({
-  //   mutationFn: createCabin,
-  //   onSuccess: () => {
-  //     toast.success("Cabin created successfully!");
-  //     queryClient.invalidateQueries({ queryKey: ["cabins"] });
-  //     reset();
-  //   },
-  //   onError: (error) => {
-  //     toast.error(error.message);
-  //   },
-  // });
-
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 

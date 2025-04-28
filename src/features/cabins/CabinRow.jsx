@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCabin } from "../../services/apiCabnis";
-import toast from "react-hot-toast";
 import { useState } from "react";
 import CreateCabinForm from "./CreateCabinForm";
+import { useDeleteCabin } from "./useDeleteCabin";
+import { HiDuplicate, HiPencil, HiTrash } from "react-icons/hi";
+import { useCreateCabin } from "./useCreatingCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -56,20 +56,21 @@ function CabinRow({ cabin }) {
     regularPrice,
   } = cabin;
 
-  const queryClient = useQueryClient();
+  const { isDeleting, deleteCabin } = useDeleteCabin();
+  const { isCreating, createCabin } = useCreateCabin();
 
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success("Cabin deleted successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
+  function handleDuplicate() {
+    const newCabin = {
+      ...cabin,
+      name: `${name} (copy)`,
+    };
+    createCabin(newCabin, {
+      onSuccess: () => {
+        setShowForm(false);
+      },
+    });
+  }
+
   return (
     <>
       <TableRow role="row">
@@ -77,13 +78,16 @@ function CabinRow({ cabin }) {
         <Cabin>{name}</Cabin>
         <div>up to {maxCapacity} guests</div>
         <Price> {formatCurrency(regularPrice)}</Price>
-        {discount && <Discount>{discount} %</Discount>}
+        {discount ? <Discount>{discount} %</Discount> : <span>&mdash;</span>}
         <div>
-          <button onClick={() => setShowForm((showForm) => !showForm)}>
-            Edit
+          <button onClick={handleDuplicate} disabled={isCreating}>
+            <HiDuplicate />
           </button>
-          <button disabled={isDeleting} onClick={() => mutate(cabinId)}>
-            Delete
+          <button onClick={() => setShowForm((showForm) => !showForm)}>
+            <HiPencil />
+          </button>
+          <button disabled={isDeleting} onClick={() => deleteCabin(cabinId)}>
+            <HiTrash />
           </button>
         </div>
       </TableRow>
