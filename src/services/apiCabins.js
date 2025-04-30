@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
 import supabase, { supabaseUrl } from "./supabase";
 
-export async function getCabnis() {
+export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
+
   if (error) {
-    console.error("Error fetching cabins:", error);
-    return null;
+    console.error(error);
+    throw new Error("Cabins could not be loaded");
   }
 
   return data;
@@ -46,13 +46,13 @@ export async function createEditCabin(newCabin, id) {
     .upload(imageName, newCabin.image);
 
   // 3. Delete the cabin IF there was an error uplaoding image
-  // if (storageError) {
-  //   await supabase.from("cabins").delete().eq("id", data.id);
-  //   console.error(storageError);
-  //   throw new Error(
-  //     "Cabin image could not be uploaded and the cabin was not created"
-  //   );
-  // }
+  if (storageError) {
+    await supabase.from("cabins").delete().eq("id", data.id);
+    console.error(storageError);
+    throw new Error(
+      "Cabin image could not be uploaded and the cabin was not created"
+    );
+  }
 
   return data;
 }
@@ -61,7 +61,8 @@ export async function deleteCabin(id) {
   const { data, error } = await supabase.from("cabins").delete().eq("id", id);
 
   if (error) {
-    throw new Error("Error deleting cabin");
+    console.error(error);
+    throw new Error("Cabin could not be deleted");
   }
 
   return data;
