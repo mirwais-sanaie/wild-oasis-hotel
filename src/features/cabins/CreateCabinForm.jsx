@@ -31,6 +31,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         {
           onSuccess: (data) => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -40,6 +41,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         {
           onSuccess: (data) => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -139,7 +141,11 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isWorking} variation="primary">

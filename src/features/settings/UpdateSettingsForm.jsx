@@ -12,7 +12,7 @@ function UpdateSettingsForm() {
       minBookingLength,
       maxBookingLength,
       maxGuestsPerBooking,
-      breakfastPrice,
+      breakFastPrice,
     } = {},
   } = useSettings();
   const { isUpdating, updateSetting } = useUpdateSetting();
@@ -62,7 +62,7 @@ function UpdateSettingsForm() {
         <Input
           type="number"
           id="breakfast-price"
-          defaultValue={breakfastPrice}
+          defaultValue={breakFastPrice}
           disabled={isUpdating}
           onBlur={(e) => handleUpdate(e, "breakfastPrice")}
         />
