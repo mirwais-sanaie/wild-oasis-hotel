@@ -45,17 +45,14 @@ function AddCabin() {
   return (
     <Modal>
       <Modal.Open opens="cabin-form">
-        <Button variation="primary">Add new cabin</Button>
+        <div>
+          <Button style={{ padding: "10px" }} variation="primary">
+            Add new cabin
+          </Button>
+        </div>
       </Modal.Open>
       <Modal.Window name="cabin-form">
         <CreateCabinForm />
-      </Modal.Window>
-
-      <Modal.Open opens="table">
-        <Button variation="primary">Show table</Button>
-      </Modal.Open>
-      <Modal.Window name="table">
-        <CabinTable />
       </Modal.Window>
     </Modal>
   );

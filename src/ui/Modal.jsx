@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { GrClose } from "react-icons/gr";
 import { HiLockClosed, HiX } from "react-icons/hi";
 import styled from "styled-components";
@@ -7,10 +8,12 @@ import {
   cloneElement,
   createContext,
   useContext,
+  useRef,
   useState,
 } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
+import { useCloseModal } from "../hooks/useCloseModal";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -83,10 +86,13 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
+
+  const ref = useCloseModal(close);
+
   if (name !== openName) return null;
   return createPortal(
     <Overlay>
-      <StyledModal>
+      <StyledModal ref={ref}>
         <Button onClick={close}>
           <HiXMark />
         </Button>
