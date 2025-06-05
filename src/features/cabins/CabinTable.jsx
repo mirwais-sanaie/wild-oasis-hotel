@@ -37,21 +37,21 @@ function CabinTable() {
   }
 
   return (
-    <div style={{ width: "100%" }}>
-      <Table columns={"0.6fr 1.8fr 2.2fr 1fr 1fr 1fr"}>
-        <Table.Header role="row">
-          <div>image</div>
-          <div>Name</div>
-          <div>Location</div>
-          <div>Price</div>
-          <div>Rating</div>
-          <div>Actions</div>
-        </Table.Header>
-      </Table>
-      {cabins.map((cabin) => (
-        <CabinRow key={cabin.id} cabin={cabin} />
-      ))}
-    </div>
+    <Table columns={"0.6fr 1.8fr 2.2fr 1fr 1fr 1fr"}>
+      <Table.Header>
+        <div>image</div>
+        <div>Name</div>
+        <div>Location</div>
+        <div>Price</div>
+        <div>Rating</div>
+        <div>Actions</div>
+      </Table.Header>
+
+      <Table.Body
+        data={cabins}
+        render={(cabin) => <CabinRow key={cabin.id} cabin={cabin} />}
+      />
+    </Table>
   );
 }
 

@@ -76,44 +76,42 @@ function CabinRow({ cabin }) {
   }
 
   return (
-    <>
-      <Table.Row role="row">
-        <Img src={image} />
-        <Cabin>{name}</Cabin>
-        <div>up to {maxCapacity} guests</div>
-        <Price> {formatCurrency(regularPrice)}</Price>
-        {discount ? <Discount>{discount} %</Discount> : <span>&mdash;</span>}
-        <div>
-          <button onClick={handleDuplicate} disabled={isCreating}>
-            <HiDuplicate />
-          </button>
+    <Table.Row role="row">
+      <Img src={image} />
+      <Cabin>{name}</Cabin>
+      <div>up to {maxCapacity} guests</div>
+      <Price> {formatCurrency(regularPrice)}</Price>
+      {discount ? <Discount>{discount} %</Discount> : <span>&mdash;</span>}
+      <div>
+        <button onClick={handleDuplicate} disabled={isCreating}>
+          <HiDuplicate />
+        </button>
 
-          <Modal>
-            <Modal.Open opens={"editing"}>
-              <button onClick={() => setShowForm((showForm) => !showForm)}>
-                <HiPencil />
-              </button>
-            </Modal.Open>
-            <Modal.Window name={"editing"}>
-              <CreateCabinForm cabinToEdit={cabin} setShowForm={setShowForm} />
-            </Modal.Window>
+        <Modal>
+          <Modal.Open opens={"editing"}>
+            <button onClick={() => setShowForm((showForm) => !showForm)}>
+              <HiPencil />
+            </button>
+          </Modal.Open>
+          <Modal.Window name={"editing"}>
+            <CreateCabinForm cabinToEdit={cabin} setShowForm={setShowForm} />
+          </Modal.Window>
 
-            <Modal.Open opens={"deleting"}>
-              <button disabled={isDeleting}>
-                <HiTrash />
-              </button>
-            </Modal.Open>
-            <Modal.Window name={"deleting"}>
-              <ConfirmDelete
-                resourceName={"cabins"}
-                onConfirm={() => deleteCabin(cabinId)}
-                disabled={isDeleting}
-              />
-            </Modal.Window>
-          </Modal>
-        </div>
-      </Table.Row>
-    </>
+          <Modal.Open opens={"deleting"}>
+            <button disabled={isDeleting}>
+              <HiTrash />
+            </button>
+          </Modal.Open>
+          <Modal.Window name={"deleting"}>
+            <ConfirmDelete
+              resourceName={"cabins"}
+              onConfirm={() => deleteCabin(cabinId)}
+              disabled={isDeleting}
+            />
+          </Modal.Window>
+        </Modal>
+      </div>
+    </Table.Row>
   );
 }
 
