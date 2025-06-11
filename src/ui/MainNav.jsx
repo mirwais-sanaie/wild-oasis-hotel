@@ -63,9 +63,9 @@ export default function MainNav() {
         </StyledNavLink>
       </li>
       <li>
-        <StyledNavLink to="/account">
+        <StyledNavLink to="/bookings">
           <HiCalendarDays />
-          Booking
+          Bookings
         </StyledNavLink>
       </li>
       <li>
