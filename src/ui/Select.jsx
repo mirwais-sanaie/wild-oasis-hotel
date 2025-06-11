@@ -10,6 +10,22 @@ const StyledSelect = styled.select`
         : "var(--color-grey-300)"};
   border-radius: var(--border-radius-sm);
   background-color: var(--color-grey-0);
+  /* background-color: ${(props) =>
+    props.type === "white" ? "orange" : "green"}; */
   font-weight: 500;
   box-shadow: var(--shadow-sm);
 `;
+
+function Select({ options, value, handleChange, ...props }) {
+  return (
+    <StyledSelect value={value} {...props} onChange={handleChange}>
+      {options.map((option) => (
+        <option value={option.value} key={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </StyledSelect>
+  );
+}
+
+export default Select;
