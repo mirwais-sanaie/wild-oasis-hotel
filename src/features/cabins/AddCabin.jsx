@@ -46,7 +46,7 @@ function AddCabin() {
     <Modal>
       <Modal.Open opens="cabin-form">
         <div>
-          <Button style={{ padding: "10px" }} variation="primary">
+          <Button variation="primary" displayView="small">
             Add new cabin
           </Button>
         </div>
