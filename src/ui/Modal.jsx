@@ -1,19 +1,8 @@
-/* eslint-disable no-unused-vars */
-import { GrClose } from "react-icons/gr";
-import { HiLockClosed, HiX } from "react-icons/hi";
-import styled from "styled-components";
-import CreateCabinForm from "../features/cabins/CreateCabinForm";
-import {
-  Children,
-  cloneElement,
-  createContext,
-  useContext,
-  useRef,
-  useState,
-} from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
-import { useCloseModal } from "../hooks/useCloseModal";
+import styled from "styled-components";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -81,21 +70,23 @@ function Modal({ children }) {
 
 function Open({ children, opens: opensWindowName }) {
   const { open } = useContext(ModalContext);
+
   return cloneElement(children, { onClick: () => open(opensWindowName) });
 }
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
-
-  const ref = useCloseModal(close);
+  const ref = useOutsideClick(close);
 
   if (name !== openName) return null;
+
   return createPortal(
     <Overlay>
       <StyledModal ref={ref}>
         <Button onClick={close}>
           <HiXMark />
         </Button>
+
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>
     </Overlay>,

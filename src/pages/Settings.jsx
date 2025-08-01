@@ -4,10 +4,10 @@ import Row from "../ui/Row";
 
 function Settings() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <Row>
       <Heading as="h1">Update hotel settings</Heading>
       <UpdateSettingsForm />
-    </div>
+    </Row>
   );
 }
 

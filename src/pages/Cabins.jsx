@@ -1,19 +1,18 @@
-import AddCabin from "../features/cabins/AddCabin";
 import CabinTable from "../features/cabins/CabinTable";
-import CabinTableOperation from "../features/cabins/CabinTableOperation";
-
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
+import AddCabin from "../features/cabins/AddCabin";
+import CabinTableOperations from "../features/cabins/CabinTableOperations";
 
 function Cabins() {
   return (
     <>
       <Row type="horizontal">
         <Heading as="h1">All cabins</Heading>
-        <CabinTableOperation />
+        <CabinTableOperations />
       </Row>
 
-      <Row type="vertical">
+      <Row>
         <CabinTable />
         <AddCabin />
       </Row>

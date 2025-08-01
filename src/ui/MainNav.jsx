@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
+  HiOutlineCalendarDays,
+  HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlineHomeModern,
-  HiMiniCog6Tooth,
-  HiMiniUsers,
-  HiCalendarDays,
+  HiOutlineUsers,
 } from "react-icons/hi2";
 
 const NavList = styled.ul`
@@ -53,39 +53,43 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-export default function MainNav() {
+function MainNav() {
   return (
-    <NavList>
-      <li>
-        <StyledNavLink to="/dashboard">
-          <HiOutlineHome />
-          Home
-        </StyledNavLink>
-      </li>
-      <li>
-        <StyledNavLink to="/bookings">
-          <HiCalendarDays />
-          Bookings
-        </StyledNavLink>
-      </li>
-      <li>
-        <StyledNavLink to="/cabins">
-          <HiOutlineHomeModern />
-          Cabins
-        </StyledNavLink>
-      </li>
-      <li>
-        <StyledNavLink to="/users">
-          <HiMiniUsers />
-          user
-        </StyledNavLink>
-      </li>
-      <li>
-        <StyledNavLink to="/settings">
-          <HiMiniCog6Tooth />
-          Setting
-        </StyledNavLink>
-      </li>
-    </NavList>
+    <nav>
+      <NavList>
+        <li>
+          <StyledNavLink to="/dashboard">
+            <HiOutlineHome />
+            <span>Home</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/bookings">
+            <HiOutlineCalendarDays />
+            <span>Bookings</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/cabins">
+            <HiOutlineHomeModern />
+            <span>Cabins</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/users">
+            <HiOutlineUsers />
+            <span>Users</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/settings">
+            <HiOutlineCog6Tooth />
+            <span>Settings</span>
+          </StyledNavLink>
+        </li>
+      </NavList>
+    </nav>
   );
 }
+
+export default MainNav;

@@ -1,53 +1,27 @@
-/* eslint-disable no-unused-vars */
-// import styled from "styled-components";
-import GlobalStyle from "./styles/GlobalStyles";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Account from "./pages/Account";
-import Cabins from "./pages/Cabins";
-import Login from "./pages/Login";
-import Settings from "./pages/Settings";
-import Users from "./pages/Users";
-import PageNotFound from "./pages/PageNotFound";
-import Bookings from "./pages/Bookings";
-import AppLayout from "./ui/AppLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
-// const H1 = styled.h1`
-//   color: white;
-//   font-size: 24px;
-//   text-align: center;
-//   margin-top: 200px;
-//   padding: 20px;
-//   background: var(--color-yellow-700);
-//   border-radius: 5px;
-//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-//   transition: background 0.3s ease, color 0.3s ease;
-
-//   &:hover {
-//     background: #ddd;
-//     color: #333;
-//   }
-// `;
-
-// const Input = styled.input`
-//   border: 1px solid gray;
-//   font-size: 16px;
-//   padding: 10px;
-// `;
-
-// const ContainerStyle = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   background-color: var(--color-brand-200);
-// `;
+import GlobalStyles from "./styles/GlobalStyles";
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Users from "./pages/Users";
+import Settings from "./pages/Settings";
+import Account from "./pages/Account";
+// import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
+import AppLayout from "./ui/AppLayout";
+import Booking from "./pages/Booking";
+import Checkin from "./pages/Checkin";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import { DarkModeProvider } from "./context/DarkModeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // staleTime: 1000 * 60,
+      // staleTime: 60 * 1000,
       staleTime: 0,
     },
   },
@@ -55,53 +29,52 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace to={"dashboard"} />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="account" element={<Account />} />
-            <Route path="Cabins" element={<Cabins />} />
-            <Route path="bookings" element={<Bookings />} />
-            <Route path="users" element={<Users />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
 
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+        <GlobalStyles />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route index element={<Navigate replace to="dashboard" />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="bookings" element={<Bookings />} />
+              <Route path="bookings/:bookingId" element={<Booking />} />
+              <Route path="checkin/:bookingId" element={<Checkin />} />
+              <Route path="cabins" element={<Cabins />} />
+              <Route path="users" element={<Users />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="account" element={<Account />} />
+            </Route>
 
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "8px" }}
-        toastOptions={{
-          style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px ",
-            backgroundColor: "var(--color-grey-0)",
-            color: "var(--color-grey-700)",
-          },
+            {/* <Route path="login" element={<Login />} /> */}
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
 
-          success: {
-            duration: 3000,
-            iconTheme: {
-              primary: "green",
-              secondary: "black",
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
             },
-          },
-
-          error: {
-            duration: 5000,
-          },
-        }}
-      />
-    </QueryClientProvider>
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "var(--color-grey-0)",
+              color: "var(--color-grey-700)",
+            },
+          }}
+        />
+      </QueryClientProvider>
+    </DarkModeProvider>
   );
 }
 

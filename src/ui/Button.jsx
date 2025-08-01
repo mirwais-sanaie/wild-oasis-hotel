@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-// Size styles
 const sizes = {
   small: css`
     font-size: 1.2rem;
@@ -21,7 +20,6 @@ const sizes = {
   `,
 };
 
-// Variation styles
 const variations = {
   primary: css`
     color: var(--color-brand-50);
@@ -54,28 +52,14 @@ const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
-  height: 40px;
 
   ${(props) => sizes[props.size]}
   ${(props) => variations[props.variation]}
-
-  ${(props) =>
-    props.displayView === "small"
-      ? css`
-          display: inline-block;
-          width: auto;
-          padding-inline: 10px;
-        `
-      : css`
-          display: block;
-          width: 100%;
-        `}
 `;
 
 Button.defaultProps = {
   variation: "primary",
   size: "medium",
-  displayView: "full",
 };
 
 export default Button;

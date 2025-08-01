@@ -1,61 +1,37 @@
 import Button from "../../ui/Button";
-import Modal from "../../ui/Modal";
-import CabinTable from "./CabinTable";
 import CreateCabinForm from "./CreateCabinForm";
+import Modal from "../../ui/Modal";
 
-// function AddCabin() {
-//   return (
-//     <div>
-//       <Modal>
-//         <Modal.Open opens="cabin-form">
-//           <Button>Add new cabin</Button>
-//         </Modal.Open>
-//         <Modal.Window name="cabin-form">
-//           <CreateCabinForm />
-//         </Modal.Window>
-//       </Modal>
-//     </div>
-//   );
-// }
+function AddCabin() {
+  return (
+    <div>
+      <Modal>
+        <Modal.Open opens="cabin-form">
+          <Button>Add new cabin</Button>
+        </Modal.Open>
+        <Modal.Window name="cabin-form">
+          <CreateCabinForm />
+        </Modal.Window>
+      </Modal>
+    </div>
+  );
+}
 
 // function AddCabin() {
 //   const [isOpenModal, setIsOpenModal] = useState(false);
 
 //   return (
-//     <div style={{ marginTop: "10px" }}>
-//       <Button
-//         variation="primary"
-//         size="small"
-//         onClick={() => setIsOpenModal((show) => !show)}
-//       >
+//     <div>
+//       <Button onClick={() => setIsOpenModal((show) => !show)}>
 //         Add new cabin
 //       </Button>
 //       {isOpenModal && (
-//         <Modal onClose={() => setIsOpenModal((show) => !show)}>
-//           <CreateCabinForm
-//             onCloseModal={() => setIsOpenModal((show) => !show)}
-//           />
+//         <Modal onClose={() => setIsOpenModal(false)}>
+//           <CreateCabinForm onCloseModal={() => setIsOpenModal(false)} />
 //         </Modal>
 //       )}
 //     </div>
 //   );
 // }
-
-function AddCabin() {
-  return (
-    <Modal>
-      <Modal.Open opens="cabin-form">
-        <div>
-          <Button variation="primary" displayView="small">
-            Add new cabin
-          </Button>
-        </div>
-      </Modal.Open>
-      <Modal.Window name="cabin-form">
-        <CreateCabinForm />
-      </Modal.Window>
-    </Modal>
-  );
-}
 
 export default AddCabin;
